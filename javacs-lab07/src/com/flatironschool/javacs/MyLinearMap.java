@@ -1,5 +1,5 @@
 /**
- * 
+ *  Edited by Lindsey Gillaspie
  */
 package com.flatironschool.javacs;
 
@@ -63,7 +63,12 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 	 * @param target
 	 */
 	private Entry findEntry(Object target) {
-        // TODO: fill this in
+        // Completed this method
+		for (Entry entry: entries) {
+			if(equals(target, entry.getKey())) {
+				return entry;
+			}
+		}
 		return null;
 	}
 
@@ -98,8 +103,13 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V get(Object key) {
-        // TODO: fill this in.
-		return null;
+        // Completed this method.
+		Entry entry = findEntry(key);
+		// Make sure entry isn't null
+		if (entry == null) {
+			return null;
+		}
+		return entry.getValue();
 	}
 
 	@Override
@@ -118,8 +128,17 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-        // TODO: fill this in.
-        return null;
+        // Completed this method.
+		Entry entry = findEntry(key);
+		// If the entry is null, go ahead and add
+		if(entry == null) {
+			entries.add(new Entry(key, value));
+			return null;
+		} else {	// else, update value
+			V old = entry.getValue();
+			entry.setValue(value);
+			return old;
+		}
 	}
 
 	@Override
@@ -131,8 +150,16 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(Object key) {
-        // TODO: fill this in.
-        return null;
+        // Completed this method.
+		Entry entry = findEntry(key);
+		// If entry doesn't exist, don't do anything
+		if(entry == null) {
+			return null;
+		} else {
+			V value = entry.getValue();
+			entries.remove(entry);
+			return value;
+		}
 	}
 
 	@Override
